@@ -9,10 +9,11 @@ import racingcar.exception.ErrorMessage;
 public class InputValidator {
 
     public void validateCarNames(String carNames) {
-        String[] carNamesList = carNames.split(",");
+        String[] carNamesList = Arrays.stream(carNames.split(","))
+                .map(String::trim)
+                .toArray(String[]::new);
 
         for (String carName : carNamesList) {
-            carName = carName.trim();
             checkNameLength(carName);
         }
 
