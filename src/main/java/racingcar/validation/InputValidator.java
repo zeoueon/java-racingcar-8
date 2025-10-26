@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import racingcar.exception.ErrorMessage;
 
 public class InputValidator {
 
@@ -22,19 +23,19 @@ public class InputValidator {
         try {
             checkNonNegativeInteger(Integer.parseInt(attemptCount));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.NOT_INTEGER_TYPE);
         }
     }
 
     private void checkNonNegativeInteger(int attemptCount) {
-        if (attemptCount < 0) {
-            throw new IllegalArgumentException();
+        if (attemptCount <= 0) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_ATTEMPT_COUNT);
         }
     }
 
     private void checkNameLength(String carNames) {
         if (carNames.length() > 5) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.INVALID_CAR_NAME_LENGTH);
         }
     }
 
@@ -43,7 +44,7 @@ public class InputValidator {
         Set<String> duplicateCarNameSet = new HashSet<>(duplicateCarNameList);
 
         if (duplicateCarNameList.size() != duplicateCarNameSet.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.NOT_DUPLICATE_CAR_NAMES);
         }
     }
 }
