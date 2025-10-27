@@ -9,14 +9,15 @@ import racingcar.exception.ErrorMessage;
 public class InputValidator {
 
     public void validateCarNames(String carNames) {
-        String[] carNamesList = Arrays.stream(carNames.split(","))
+        List<String> carNamesList = Arrays.stream(carNames.split(","))
                 .map(String::trim)
-                .toArray(String[]::new);
+                .toList();
 
         for (String carName : carNamesList) {
             checkNameLength(carName);
         }
 
+        checkCarNamesCount(carNamesList);
         checkDuplicateCarNames(carNamesList);
     }
 
@@ -40,12 +41,17 @@ public class InputValidator {
         }
     }
 
-    private void checkDuplicateCarNames(String[] carNamesList) {
-        List<String> duplicateCarNameList = Arrays.asList(carNamesList);
-        Set<String> duplicateCarNameSet = new HashSet<>(duplicateCarNameList);
+    private void checkDuplicateCarNames(List<String> carNamesList) {
+        Set<String> duplicateCarNameSet = new HashSet<>(carNamesList);
 
-        if (duplicateCarNameList.size() != duplicateCarNameSet.size()) {
+        if (carNamesList.size() != duplicateCarNameSet.size()) {
             throw new IllegalArgumentException(ErrorMessage.NOT_DUPLICATE_CAR_NAMES);
+        }
+    }
+
+    private void checkCarNamesCount(List<String> carNamesList) {
+        if (carNamesList.size() < 2) {
+            throw new IllegalArgumentException(ErrorMessage.MINIMUM_CAR_COUNT);
         }
     }
 }
