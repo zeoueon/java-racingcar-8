@@ -1,6 +1,7 @@
 package racingcar.service;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -31,7 +32,8 @@ public class RacingGame {
     private Map<String, Integer> getSnapshot() {
         List<Car> currentCars = cars.getCurrentStateOfCars();
         return currentCars.stream()
-                .collect(Collectors.toMap(Car::getName, Car::getMoveCount));
+                .collect(Collectors.toMap(Car::getName, Car::getMoveCount
+                        , (a, b) -> a, LinkedHashMap::new));
     }
 
     public List<RoundResultDto> getRoundResults() {
