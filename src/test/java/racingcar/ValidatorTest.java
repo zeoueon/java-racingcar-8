@@ -4,33 +4,39 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.exception.ErrorMessage;
 import racingcar.validation.InputValidator;
 
 public class ValidatorTest {
 
-    @Test
-    void 시도할횟수_정수_예외테스트() {
+    @ParameterizedTest
+    @NullAndEmptySource
+    @ValueSource(strings = {"5.5", "english"})
+    void 시도할횟수_정수_예외테스트(String attemptCount) {
         //given
         InputValidator validator = new InputValidator();
 
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            validator.validateAttemptCount("5.5");
+            validator.validateAttemptCount(attemptCount);
         });
 
         //then
         assertThat(exception.getMessage()).isEqualTo(ErrorMessage.NOT_INTEGER_TYPE);
     }
 
-    @Test
-    void 시도할_횟수_0이하정수_예외테스트() {
+    @ParameterizedTest
+    @ValueSource(strings = {"0", "-3"})
+    void 시도할_횟수_0이하정수_예외테스트(String attemptCount) {
         //given
         InputValidator validator = new InputValidator();
 
         //when
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-            validator.validateAttemptCount("0");
+            validator.validateAttemptCount(attemptCount);
         });
 
         //then
