@@ -1,18 +1,20 @@
 package racingcar.domain;
 
-import racingcar.util.RandomIntegerGenerator;
+import java.util.function.Supplier;
 
 public class Car {
 
     private String name;
+    private Supplier<Integer> randomIntegerSupplier;
     private int moveCount = 0;
 
-    public Car(String name) {
+    public Car(String name, Supplier<Integer> randomIntegerSupplier) {
         this.name = name;
+        this.randomIntegerSupplier = randomIntegerSupplier;
     }
 
     public boolean isMovable() {
-        return RandomIntegerGenerator.getRandomNumber() >= 4;
+        return randomIntegerSupplier.get() >= 4;
     }
 
     public void move() {
@@ -25,5 +27,9 @@ public class Car {
 
     public int getMoveCount() {
         return moveCount;
+    }
+
+    public void setRandomIntegerSupplier(Supplier<Integer> randomIntegerSupplier) {
+        this.randomIntegerSupplier = randomIntegerSupplier;
     }
 }
