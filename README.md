@@ -42,4 +42,5 @@
 - 자동차 이름 입력 값에 쉼표 이외의 문자가 있을 경우 예외를 발생한다. → `IllegalArgumentException`
 - 자동차 이름이 5자를 초과한다면 예외를 발생한다. -> `IllegalArgumentException`
 - 자동차 이름 중 중복 값이 있다면 예외를 발생한다 -> `IllegalArgumentException`
+- 자동차 개수가 1대 이하일 경우 예외를 발생한다. -> `IllegalArgumentException`
 - 시도할 횟수에 음이 아닌 정수 외의 값이 입력될 경우 예외를 발생한다. → `IllegalArgumentException`
