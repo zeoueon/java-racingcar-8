@@ -4,6 +4,8 @@ import java.util.function.Supplier;
 
 public class Car {
 
+    private static final int MOVABLE_NUMBER = 4;
+
     private String name;
     private Supplier<Integer> randomIntegerSupplier;
     private int moveCount = 0;
@@ -14,7 +16,7 @@ public class Car {
     }
 
     public boolean isMovable() {
-        return randomIntegerSupplier.get() >= 4;
+        return randomIntegerSupplier.get() >= MOVABLE_NUMBER;
     }
 
     public void move() {
