@@ -2,7 +2,6 @@ package racingcar.view;
 
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 import racingcar.dto.RoundResultDto;
 
 public class Output {
@@ -18,13 +17,8 @@ public class Output {
     }
 
     public static void printWinner(List<String> winners) {
-        StringJoiner sj = new StringJoiner(", ");
-
-        for (String winner : winners) {
-            sj.add(winner);
-        }
         System.out.print("최종 우승자 : ");
-        System.out.println(sj.toString());
+        System.out.println(String.join(", ", winners));
     }
 
     private static void printRoundResult(RoundResultDto roundResultDto) {
