@@ -34,9 +34,12 @@ public class Cars {
     }
 
     public List<Car> findWinner() {
-        int maxMoveCount = cars.stream().mapToInt(Car::getMoveCount)
-                .max().orElse(0);
         return cars.stream().filter(
-                car -> car.getMoveCount() == maxMoveCount).toList();
+                car -> car.getMoveCount() == getMaxMoveCount()).toList();
+    }
+
+    private int getMaxMoveCount() {
+        return cars.stream().mapToInt(Car::getMoveCount)
+                .max().orElse(0);
     }
 }
