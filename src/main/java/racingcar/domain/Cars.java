@@ -2,10 +2,11 @@ package racingcar.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import racingcar.util.RandomIntegerGenerator;
 
 public class Cars {
 
-    private List<Car> cars = new ArrayList<>();
+    public List<Car> cars = new ArrayList<>();
 
     public Cars(List<String> carNames) {
         createCars(carNames);
@@ -13,7 +14,7 @@ public class Cars {
 
     private void createCars(List<String> carNames) {
         for (String carName : carNames) {
-            cars.add(new Car(carName));
+            cars.add(new Car(carName, RandomIntegerGenerator::getRandomNumber));
         }
     }
 
@@ -33,9 +34,11 @@ public class Cars {
         return cars.stream().toList();
     }
 
-    public List<Car> findWinner() {
+    public List<String> findWinner() {
         return cars.stream().filter(
-                car -> car.getMoveCount() == getMaxMoveCount()).toList();
+                        car -> car.getMoveCount() == getMaxMoveCount())
+                .map(Car::getName)
+                .toList();
     }
 
     private int getMaxMoveCount() {
