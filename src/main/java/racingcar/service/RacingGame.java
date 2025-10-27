@@ -41,8 +41,6 @@ public class RacingGame {
     }
 
     public List<String> getWinners() {
-        List<Car> winners = cars.findWinner();
-        return winners.stream().map(Car::getName)
-                .collect(Collectors.toList());
+        return cars.findWinner();
     }
 }
